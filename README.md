@@ -60,9 +60,18 @@ npm test
 
 ## Deploy (Vercel + Neon/Supabase)
 
-1. Create a Postgres database on [Neon](https://neon.tech) or [Supabase](https://supabase.com) and copy the connection string.
-2. Push the repo to GitHub and import it in [Vercel](https://vercel.com).
-3. Set environment variables in the Vercel project:
+The app is a Next.js full stack project (API routes + Prisma), so it needs a Node
+runtime and a hosted Postgres database. GitHub alone only stores the code.
+
+Repo: https://github.com/skykarki/vacation-calculator (default branch `master`).
+
+1. Create a Postgres database on [Neon](https://neon.tech) or
+   [Supabase](https://supabase.com) and copy the pooled connection string
+   (keep `?sslmode=require`).
+2. Go to [vercel.com](https://vercel.com), sign in with GitHub, choose
+   **Add New Project**, and import `vacation-calculator`. Vercel auto-detects
+   Next.js; leave build settings as default.
+3. Before the first deploy, open **Environment Variables** and add:
 
 ```bash
 DATABASE_URL="postgresql://USER:PASSWORD@HOST/dbname?sslmode=require"
@@ -72,13 +81,15 @@ AUTH_GOOGLE_ID=""
 AUTH_GOOGLE_SECRET=""
 ```
 
-4. Run migrations against the hosted database (once):
+4. Deploy. On Vercel the `vercel-build` script runs automatically:
+   `prisma generate && prisma migrate deploy && next build`, so schema
+   migrations are applied to the hosted database on every deploy.
+5. Open the deployed URL, sign up, and check `GET /api/health` returns
+   `{"ok":true,"database":"connected"}`.
+6. After the first deploy, set `AUTH_URL` to the real Vercel URL and redeploy.
 
-```bash
-npx prisma migrate deploy
-```
-
-5. Deploy. `postinstall` already runs `prisma generate`. The Next.js app includes API routes, so frontend and backend ship together.
+`AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` are optional; leave them empty to hide
+the Google button.
 
 ## Structure
 
