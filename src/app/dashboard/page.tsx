@@ -66,6 +66,12 @@ export default async function DashboardPage() {
         </div>
         <div className="flex flex-wrap gap-2">
           <Link
+            href="/flights"
+            className="inline-flex w-fit rounded-full border border-line bg-surface px-5 py-2.5 text-sm font-medium hover:bg-accent-soft"
+          >
+            Book flights
+          </Link>
+          <Link
             href="/control"
             className="inline-flex w-fit rounded-full border border-line bg-surface px-5 py-2.5 text-sm font-medium hover:bg-accent-soft"
           >

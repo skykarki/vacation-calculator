@@ -22,6 +22,12 @@ export default function Home() {
             Open dashboard
           </Link>
           <Link
+            href="/flights"
+            className="rounded-full border border-zinc-200 px-5 py-2.5 text-sm font-medium dark:border-zinc-800"
+          >
+            Book flights
+          </Link>
+          <Link
             href="/trips"
             className="rounded-full border border-zinc-200 px-5 py-2.5 text-sm font-medium dark:border-zinc-800"
           >

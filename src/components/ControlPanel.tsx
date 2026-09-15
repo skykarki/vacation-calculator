@@ -42,6 +42,14 @@ type ControlTrip = {
     type: string;
     provider: string;
     confirmation: string | null;
+    origin: string | null;
+    destination: string | null;
+    flightNumber?: string | null;
+    cabin?: string | null;
+    price?: number | null;
+    currency?: string | null;
+    passengerName?: string | null;
+    passengers?: number | null;
     startDate: string | null;
     endDate: string | null;
     notes: string | null;
@@ -312,11 +320,13 @@ export function ControlPanel({
                 />
               ) : null}
               {tripTab === "bookings" ? (
-                <BookingManager
-                  key={`bookings-${selected.id}`}
-                  tripId={selected.id}
-                  bookings={selected.bookings}
-                />
+                <div className="space-y-4">
+                  <BookingManager
+                    key={`bookings-${selected.id}`}
+                    tripId={selected.id}
+                    bookings={selected.bookings}
+                  />
+                </div>
               ) : null}
               {tripTab === "documents" ? (
                 <DocumentVault

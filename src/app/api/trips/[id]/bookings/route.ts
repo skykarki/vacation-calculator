@@ -36,7 +36,16 @@ export async function POST(
   const trip = await getOwnedTrip(id, session.user.id);
   if (!trip) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  const { type, provider, confirmation, startDate, endDate, notes } = await req.json();
+  const {
+    type,
+    provider,
+    confirmation,
+    origin,
+    destination,
+    startDate,
+    endDate,
+    notes,
+  } = await req.json();
   if (!type || !provider) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
@@ -47,6 +56,8 @@ export async function POST(
       type,
       provider,
       confirmation,
+      origin: origin || null,
+      destination: destination || null,
       startDate: startDate ? new Date(startDate) : null,
       endDate: endDate ? new Date(endDate) : null,
       notes,

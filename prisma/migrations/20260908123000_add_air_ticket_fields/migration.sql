@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "Booking" ADD COLUMN "flightNumber" TEXT;
+ALTER TABLE "Booking" ADD COLUMN "cabin" TEXT;
+ALTER TABLE "Booking" ADD COLUMN "price" DOUBLE PRECISION;
+ALTER TABLE "Booking" ADD COLUMN "currency" TEXT NOT NULL DEFAULT 'USD';
+ALTER TABLE "Booking" ADD COLUMN "passengerName" TEXT;
+ALTER TABLE "Booking" ADD COLUMN "passengers" INTEGER NOT NULL DEFAULT 1;

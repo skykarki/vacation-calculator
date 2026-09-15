@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { DateInput } from "@/components/DateInput";
 import { calculateTripDuration } from "@/lib/date-utils";
 
 export default function TripDatePicker() {
@@ -22,11 +23,10 @@ export default function TripDatePicker() {
         <label className="block text-sm font-medium" htmlFor="trip-start-date">
           Start date
         </label>
-        <input
+        <DateInput
           id="trip-start-date"
-          type="date"
           value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
+          onChange={setStartDate}
           className="mt-1 w-full rounded border border-zinc-200 px-3 py-2 dark:border-zinc-800"
         />
       </div>
@@ -34,12 +34,11 @@ export default function TripDatePicker() {
         <label className="block text-sm font-medium" htmlFor="trip-end-date">
           End date
         </label>
-        <input
+        <DateInput
           id="trip-end-date"
-          type="date"
           value={endDate}
           min={startDate || undefined}
-          onChange={(e) => setEndDate(e.target.value)}
+          onChange={setEndDate}
           className="mt-1 w-full rounded border border-zinc-200 px-3 py-2 dark:border-zinc-800"
         />
       </div>

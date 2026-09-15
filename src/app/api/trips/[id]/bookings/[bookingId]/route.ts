@@ -29,6 +29,9 @@ export async function PATCH(
       provider: body.provider ?? booking.provider,
       confirmation:
         body.confirmation === undefined ? booking.confirmation : body.confirmation,
+      origin: body.origin === undefined ? booking.origin : body.origin || null,
+      destination:
+        body.destination === undefined ? booking.destination : body.destination || null,
       startDate:
         body.startDate === undefined
           ? booking.startDate

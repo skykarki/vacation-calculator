@@ -6,6 +6,7 @@ export const googleEnabled = Boolean(
 
 export const authConfig = {
   providers: [],
+  trustHost: true,
   pages: {
     signIn: "/login",
   },
@@ -16,7 +17,8 @@ export const authConfig = {
       const isProtected =
         pathname.startsWith("/dashboard") ||
         pathname.startsWith("/trips") ||
-        pathname.startsWith("/control");
+        pathname.startsWith("/control") ||
+        pathname.startsWith("/flights");
       if (isProtected) return !!auth;
       return true;
     },

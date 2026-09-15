@@ -1,5 +1,7 @@
 "use client";
 
+import { DateInput } from "@/components/DateInput";
+
 type DatePickerProps = {
   id: string;
   label: string;
@@ -20,15 +22,7 @@ export function DatePicker({
   return (
     <label htmlFor={id} className="flex flex-col gap-1 text-sm">
       <span className="font-medium">{label}</span>
-      <input
-        id={id}
-        type="date"
-        value={value}
-        min={min}
-        required={required}
-        onChange={(event) => onChange(event.target.value)}
-        className="rounded-md border border-zinc-200 bg-transparent px-3 py-2 dark:border-zinc-800"
-      />
+      <DateInput id={id} value={value} min={min} required={required} onChange={onChange} />
     </label>
   );
 }

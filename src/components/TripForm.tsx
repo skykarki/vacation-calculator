@@ -7,7 +7,7 @@ import {
   endDateFromStartAndDays,
   toIsoDate,
 } from "@/lib/date-utils";
-import { DatePicker } from "@/components/DatePicker";
+import { DateRangeFields } from "@/components/DateRangeFields";
 
 type TripFormValues = {
   title: string;
@@ -98,6 +98,26 @@ export function TripForm({
         }
       }
       return { ...current, endDate };
+    });
+  }
+
+  function swapDates() {
+    if (!form.startDate && !form.endDate) return;
+    const nextStart = form.endDate;
+    const nextEnd = form.startDate;
+    setForm((current) => {
+      if (nextStart && nextEnd && nextEnd >= nextStart) {
+        try {
+          const totalDays = calculateTripDuration(
+            new Date(nextStart),
+            new Date(nextEnd),
+          ).totalDays;
+          return { ...current, startDate: nextStart, endDate: nextEnd, totalDays };
+        } catch {
+          return { ...current, startDate: nextStart, endDate: nextEnd };
+        }
+      }
+      return { ...current, startDate: nextStart, endDate: nextEnd };
     });
   }
 
@@ -192,22 +212,16 @@ export function TripForm({
         className="w-full rounded border border-line bg-surface px-3 py-2"
         required
       />
-      <div className="grid grid-cols-2 gap-4">
-        <DatePicker
-          id="startDate"
-          label="Start date"
-          value={form.startDate}
-          required
-          onChange={applyStartDate}
-        />
-        <DatePicker
-          id="endDate"
-          label="End date"
-          value={form.endDate}
-          min={form.startDate || undefined}
-          onChange={applyEndDate}
-        />
-      </div>
+      <DateRangeFields
+        startId="startDate"
+        endId="endDate"
+        startValue={form.startDate}
+        endValue={form.endDate}
+        startRequired
+        onStartChange={applyStartDate}
+        onEndChange={applyEndDate}
+        onSwap={swapDates}
+      />
       <label htmlFor="totalDays" className="flex flex-col gap-1 text-sm">
         <span className="font-medium">Days</span>
         <input

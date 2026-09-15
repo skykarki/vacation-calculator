@@ -11,5 +11,5 @@ export function proxy(...args: Parameters<typeof auth>) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/trips/:path*", "/control/:path*"],
+  matcher: ["/dashboard/:path*", "/trips/:path*", "/control/:path*", "/flights/:path*"],
 };

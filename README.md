@@ -87,6 +87,7 @@ src/
   app/
     api/          backend routes
     dashboard/    main app pages
+    flights/      air ticket search and booking
     trips/        trip list/create pages
   components/     reusable UI
   lib/            db client, date-utils, auth config

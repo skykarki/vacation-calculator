@@ -106,14 +106,22 @@ model Expense {
 }
 
 model Booking {
-  id           String    @id @default(cuid())
-  type         String
-  provider     String
-  confirmation String?
-  startDate    DateTime?
-  endDate      DateTime?
-  notes        String?
-  createdAt    DateTime  @default(now())
+  id            String    @id @default(cuid())
+  type          String
+  provider      String
+  confirmation  String?
+  origin        String?
+  destination   String?
+  flightNumber  String?
+  cabin         String?
+  price         Float?
+  currency      String    @default("USD")
+  passengerName String?
+  passengers    Int       @default(1)
+  startDate     DateTime?
+  endDate       DateTime?
+  notes         String?
+  createdAt     DateTime  @default(now())
 
   tripId String
   trip   Trip   @relation(fields: [tripId], references: [id], onDelete: Cascade)

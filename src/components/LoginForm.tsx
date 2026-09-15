@@ -29,7 +29,8 @@ export function LoginForm() {
       return;
     }
 
-    router.push("/dashboard");
+    const callbackUrl = new URLSearchParams(window.location.search).get("callbackUrl");
+    router.push(callbackUrl || "/dashboard");
     router.refresh();
   }
 

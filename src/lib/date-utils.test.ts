@@ -2,8 +2,11 @@ import { describe, expect, it } from "vitest";
 import {
   calculateTripDuration,
   endDateFromStartAndDays,
+  formatDmy,
+  parseToIsoDate,
   parseTotalDays,
   resolveTripDates,
+  swapDateValues,
 } from "./date-utils";
 
 describe("calculateTripDuration", () => {
@@ -86,6 +89,32 @@ describe("parseTotalDays", () => {
   it("rejects values below 1", () => {
     expect(() => parseTotalDays(0)).toThrow("Days must be a whole number of at least 1");
     expect(() => parseTotalDays(1.5)).toThrow("Days must be a whole number of at least 1");
+  });
+});
+
+describe("formatDmy", () => {
+  it("formats ISO dates as day-month-year", () => {
+    expect(formatDmy("2026-05-01")).toBe("01-05-2026");
+  });
+});
+
+describe("parseToIsoDate", () => {
+  it("parses day-month-year values", () => {
+    expect(parseToIsoDate("01-05-2026")).toBe("2026-05-01");
+    expect(parseToIsoDate("1/5/2026")).toBe("2026-05-01");
+  });
+
+  it("rejects invalid calendar dates", () => {
+    expect(parseToIsoDate("31-02-2026")).toBeNull();
+  });
+});
+
+describe("swapDateValues", () => {
+  it("switches start and end dates", () => {
+    expect(swapDateValues("2026-05-01", "2026-05-10")).toEqual({
+      startDate: "2026-05-10",
+      endDate: "2026-05-01",
+    });
   });
 });
 

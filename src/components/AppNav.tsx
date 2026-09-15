@@ -19,6 +19,9 @@ export async function AppNav() {
               <Link href="/dashboard" className="rounded-full px-3 py-1.5 hover:bg-accent-soft">
                 Dashboard
               </Link>
+              <Link href="/flights" className="rounded-full px-3 py-1.5 hover:bg-accent-soft">
+                Flights
+              </Link>
               <Link href="/control" className="rounded-full px-3 py-1.5 hover:bg-accent-soft">
                 Control
               </Link>
